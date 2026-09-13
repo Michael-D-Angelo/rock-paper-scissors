@@ -54,6 +54,7 @@ function playGame() {
   }
 }
 
+// SET function for play 5 rounds
 function playRound() {
   for (let i = 1; i < 6; i++) {
     const humanSelection = getHumanChoice();
