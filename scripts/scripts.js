@@ -28,7 +28,7 @@ function getHumanChoice() {
 }
 
 // SET function for single play
-function playRound() {
+function playGame() {
   const humanSelection = getHumanChoice();
   const computerSelection = getComputerChoice();
   if (
@@ -45,11 +45,45 @@ function playRound() {
     (humanSelection == "scissors" && computerSelection == "paper")
   ) {
     return console.log(
-      `Player wins!\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
+      `Player Wins!\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
     );
   } else {
     return console.log(
-      `Computer wins !\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
+      `Computer Wins !\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
     );
   }
 }
+
+function playRound() {
+  for (let i = 1; i < 6; i++) {
+    const humanSelection = getHumanChoice();
+    const computerSelection = getComputerChoice();
+    if (
+      (humanSelection == "rock" && computerSelection == "rock") ||
+      (humanSelection == "paper" && computerSelection == "paper") ||
+      (humanSelection == "scissors" && computerSelection == "scissors")
+    ) {
+      console.log(
+        `It's a Tie!\n\nRound = ${i}\nPlayer: ${humanSelection}\nComputer: ${computerSelection}\nPlayer: ${humanScore} | Computer: ${computerScore} `,
+      );
+    } else if (
+      (humanSelection == "rock" && computerSelection == "scissors") ||
+      (humanSelection == "paper" && computerSelection == "rock") ||
+      (humanSelection == "scissors" && computerSelection == "paper")
+    ) {
+      humanScore++;
+      console.log(
+        `Player Wins!\n\nRound = ${i}\nPlayer: ${humanSelection}\nComputer: ${computerSelection}\nPlayer: ${humanScore} | Computer: ${computerScore}`,
+      );
+    } else {
+      computerScore++;
+      console.log(
+        `Computer Wins !\n\nRound = ${i}\nPlayer: ${humanSelection}\nComputer: ${computerSelection}\nPlayer: ${humanScore} | Computer: ${computerScore}`,
+      );
+    }
+  }
+}
+for (let i = 0; i < 5; i++) {
+  console.log("hello world");
+}
+playRound();
