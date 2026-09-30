@@ -2,6 +2,12 @@
 let humanScore = 0;
 let computerScore = 0;
 
+// capture score element
+let humanScoreElement = document.querySelector(".scoreNumHuman");
+let comScoreElement = document.querySelector(".scoreNumCom");
+
+let winAnnounce = document.querySelector(".winAnnounce");
+
 // SET function computer choice logic
 function getComputerChoice() {
   let computer = Math.round(Math.random() * 2) + 1;
@@ -27,6 +33,19 @@ function getHumanChoice() {
   }
 }
 
+function winAnnouncer() {
+  if (computerScore == 5) {
+    winAnnounce.innerHTML = `<h1>Computer Wins this Round!</h1>`;
+  } else if (humanScore == 5) {
+    winAnnounce.innerHTML = `<h1>Player Wins this Round!</h1>`;
+  }
+}
+
+function changeScore() {
+  humanScoreElement.textContent = `${humanScore}`;
+  comScoreElement.textContent = `${computerScore}`;
+}
+
 // SET function for single play
 function playGame() {
   const humanSelection = getHumanChoice();
@@ -36,51 +55,49 @@ function playGame() {
     (humanSelection == "paper" && computerSelection == "paper") ||
     (humanSelection == "scissors" && computerSelection == "scissors")
   ) {
-    return console.log(
-      `It's a Tie!\nPlayer: ${humanSelection}\nComputer: ${computerSelection} `,
-    );
+    changeScore();
+    winAnnounce.innerHTML = `It's a Tie! <br />Player: <b>${humanSelection}</b><br />Computer: <b>${computerSelection}</b>`;
+    winAnnouncer();
+    // return console.log(
+    //   `It's a Tie!\nPlayer: ${humanSelection}\nComputer: ${computerSelection} `,
+    // );
   } else if (
     (humanSelection == "rock" && computerSelection == "scissors") ||
     (humanSelection == "paper" && computerSelection == "rock") ||
     (humanSelection == "scissors" && computerSelection == "paper")
   ) {
-    return console.log(
-      `Player Wins!\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
-    );
+    humanScore++;
+    changeScore();
+    winAnnounce.innerHTML = `Player Wins! <br />Player: <b>${humanSelection}</b><br />Computer: <b>${computerSelection}</b>`;
+    winAnnouncer();
+    // return console.log(
+    //   `Player Wins!\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
+    // );
   } else {
-    return console.log(
-      `Computer Wins !\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
-    );
+    computerScore++;
+    changeScore();
+    winAnnounce.innerHTML = `Compuer Wins! <br />Player: <b>${humanSelection}</b><br />Computer: <b>${computerSelection}</b>`;
+    winAnnouncer();
+    // return console.log(
+    //   `Computer Wins !\nPlayer: ${humanSelection}\nComputer: ${computerSelection}`,
+    // );
   }
 }
 
-// SET function for play 5 rounds
-// function playRound() {
-//   for (let i = 1; i < 6; i++) {
-//     const humanSelection = getHumanChoice();
-//     const computerSelection = getComputerChoice();
-//     if (
-//       (humanSelection == "rock" && computerSelection == "rock") ||
-//       (humanSelection == "paper" && computerSelection == "paper") ||
-//       (humanSelection == "scissors" && computerSelection == "scissors")
-//     ) {
-//       console.log(
-//         `It's a Tie!\n\nRound = ${i}\nPlayer: ${humanSelection}\nComputer: ${computerSelection}\nPlayer: ${humanScore} | Computer: ${computerScore} `,
-//       );
-//     } else if (
-//       (humanSelection == "rock" && computerSelection == "scissors") ||
-//       (humanSelection == "paper" && computerSelection == "rock") ||
-//       (humanSelection == "scissors" && computerSelection == "paper")
-//     ) {
-//       humanScore++;
-//       console.log(
-//         `Player Wins!\n\nRound = ${i}\nPlayer: ${humanSelection}\nComputer: ${computerSelection}\nPlayer: ${humanScore} | Computer: ${computerScore}`,
-//       );
-//     } else {
-//       computerScore++;
-//       console.log(
-//         `Computer Wins !\n\nRound = ${i}\nPlayer: ${humanSelection}\nComputer: ${computerSelection}\nPlayer: ${humanScore} | Computer: ${computerScore}`,
-//       );
-//     }
-//   }
-// }
+function playGameButtonPlay() {
+  const idSelector = document.getElementById("btn1");
+  const classSelector = document.getElementsByClassName("btn2")[0];
+  const tagSelector = document.getElementsByTagName("button")[2];
+  // Fn to call playGame fn
+  classSelector.addEventListener("click", () => {
+    playGame();
+  });
+  idSelector.addEventListener("click", () => {
+    playGame();
+  });
+  tagSelector.addEventListener("click", () => {
+    playGame();
+  });
+}
+
+playGameButtonPlay();

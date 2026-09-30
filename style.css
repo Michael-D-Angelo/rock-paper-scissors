@@ -47,3 +47,8 @@ button:active {
   position: relative;
   top: 1px;
 }
+
+.score {
+  padding-top: 42px;
+  text-align: center;
+}
